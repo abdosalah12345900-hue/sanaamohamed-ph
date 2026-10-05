@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>صيدلية سناء محمد</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --green:#079669;
+    --dark-green:#056b4c;
+    --light:#effcf7;
+    --white:#ffffff;
+    --text:#17221e;
+    --gray:#66736e;
+    --shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+body{
+    background:#f7fbf9;
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#079669;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation:hideLoader 1s forwards;
+    animation-delay:1.5s;
+}
+
+.loader-circle{
+    width:70px;
+    height:70px;
+    border:7px solid rgba(255,255,255,.3);
+    border-top-color:white;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes hideLoader{
+    to{
+        opacity:0;
+        visibility:hidden;
+    }
+}
+
+
+/* =========================
+   FLOATING BACKGROUND
+========================= */
+
+.shape{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:.3;
+    animation:float 7s ease-in-out infinite;
+}
+
+.shape1{
+    width:180px;
+    height:180px;
+    background:#6ee7b7;
+    top:120px;
+    left:-70px;
+}
+
+.shape2{
+    width:130px;
+    height:130px;
+    background:#34d399;
+    top:400px;
+    right:-50px;
+    animation-delay:2s;
+}
+
+.shape3{
+    width:90px;
+    height:90px;
+    background:#a7f3d0;
+    top:650px;
+    left:20%;
+    animation-delay:1s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-30px) rotate(15deg);
+    }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:5000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid rgba(0,0,0,.05);
+
+    transition:.3s;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:23px;
+    font-weight:bold;
+    color:var(--green);
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+
+    background:var(--green);
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    box-shadow:0 8px 20px rgba(7,150,105,.25);
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+nav a{
+    color:#34413c;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--green);
+    transform:translateY(-2px);
+}
+
+.header-icons{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+
+    background:var(--light);
+    color:var(--green);
+
+    font-size:18px;
+
+    transition:.3s;
+}
+
+.icon-btn:hover{
+    background:var(--green);
+    color:white;
+    transform:translateY(-3px);
+}
+
+.cart-count{
+    position:absolute;
+    margin-top:-35px;
+    margin-right:-5px;
+
+    background:#ef4444;
+    color:white;
+
+    width:19px;
+    height:19px;
+
+    border-radius:50%;
+
+    font-size:11px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    padding:150px 8% 80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at 80% 30%,#d8fff0 0%,transparent 35%),
+    linear-gradient(135deg,#f4fffb,#ffffff);
+}
+
+.hero-content{
+    width:55%;
+
+    animation:heroText 1s ease;
+}
+
+@keyframes heroText{
+    from{
+        opacity:0;
+        transform:translateX(50px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.badge{
+    display:inline-block;
+
+    background:#dffbef;
+    color:var(--green);
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    font-size:14px;
+    font-weight:bold;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:60px;
+    line-height:1.15;
+
+    margin-bottom:20px;
+
+    color:#12372d;
+}
+
+.hero h1 span{
+    color:var(--green);
+}
+
+.hero p{
+    color:var(--gray);
+    font-size:19px;
+    line-height:1.8;
+
+    max-width:600px;
+
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.primary-btn{
+    background:var(--green);
+    color:white;
+
+    padding:15px 27px;
+
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(7,150,105,.25);
+
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:var(--dark-green);
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(7,150,105,.3);
+}
+
+.secondary-btn{
+    background:white;
+    color:var(--green);
+
+    padding:15px 27px;
+
+    border-radius:12px;
+
+    border:1px solid #d7eee5;
+
+    font-size:16px;
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+}
+
+
+/* =========================
+   HERO MEDICAL CARD
+========================= */
+
+.hero-visual{
+    width:40%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    animation:visualFloat 4s ease-in-out infinite;
+}
+
+@keyframes visualFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.medical-card{
+    width:370px;
+    height:370px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(145deg,#079669,#0bbf87);
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+    0 30px 70px rgba(7,150,105,.3);
+}
+
+.medical-card::before{
+    content:"";
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.1);
+}
+
+.big-cross{
+    position:relative;
+
+    width:150px;
+    height:150px;
+
+    background:white;
+
+    border-radius:35px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.1);
+}
+
+.big-cross::before{
+    content:"";
+
+    position:absolute;
+
+    width:45px;
+    height:105px;
+
+    background:var(--green);
+
+    left:52px;
+    top:22px;
+
+    border-radius:10px;
+}
+
+.big-cross::after{
+    content:"";
+
+    position:absolute;
+
+    width:105px;
+    height:45px;
+
+    background:var(--green);
+
+    left:22px;
+    top:52px;
+
+    border-radius:10px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+    padding:30px 7% 70px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:20px;
+}
+
+.feature{
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    transition:.3s;
+}
+
+.feature:hover{
+    transform:translateY(-8px);
+}
+
+.feature-icon{
+    width:55px;
+    height:55px;
+
+    border-radius:15px;
+
+    background:var(--light);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+}
+
+.feature h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.feature p{
+    color:var(--gray);
+    font-size:13px;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products-section{
+    padding:80px 7%;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+
+    margin-bottom:30px;
+}
+
+.section-title{
+    font-size:38px;
+    color:#12372d;
+}
+
+.section-title span{
+    color:var(--green);
+}
+
+.section-subtitle{
+    color:var(--gray);
+    margin-top:8px;
+}
+
+.search-box{
+    width:300px;
+
+    display:flex;
+    align-items:center;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:5px 12px;
+
+    box-shadow:var(--shadow);
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+
+    width:100%;
+
+    padding:12px;
+    font-size:14px;
+}
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+
+    gap:25px;
+}
+
+.product{
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    transition:.4s;
+
+    position:relative;
+}
+
+.product:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 50px rgba(0,0,0,.12);
+}
+
+.product-image{
+    height:210px;
+
+    background:#f2faf7;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.product-image img{
+    width:90%;
+    height:90%;
+
+    object-fit:contain;
+
+    transition:.5s;
+}
+
+.product:hover img{
+    transform:scale(1.08);
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-info h3{
+    color:#17382e;
+    margin-bottom:8px;
+}
+
+.product-info p{
+    color:var(--gray);
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+.product-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:var(--green);
+}
+
+.add-cart{
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    background:var(--green);
+    color:white;
+
+    font-size:18px;
+
+    transition:.3s;
+}
+
+.add-cart:hover{
+    transform:rotate(10deg) scale(1.1);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+    padding:90px 7%;
+
+    background:
+    linear-gradient(135deg,#eafff6,#f9fffc);
+}
+
+.about-container{
+    display:flex;
+    gap:60px;
+    align-items:center;
+}
+
+.about-text{
+    flex:1;
+}
+
+.about-text p{
+    color:var(--gray);
+
+    line-height:2;
+
+    font-size:17px;
+
+    margin-top:20px;
+}
+
+.about-card{
+    flex:1;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+}
+
+.about-card-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+    padding:90px 7%;
+}
+
+.contact-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+}
+
+.contact-card{
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px);
+}
+
+.contact-card .icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.contact-card h3{
+    margin-bottom:10px;
+}
+
+.contact-card p{
+    color:var(--gray);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#092e24;
+
+    color:white;
+
+    padding:40px 7%;
+
+    text-align:center;
+}
+
+footer p{
+    color:#b8d4cb;
+    margin-top:10px;
+}
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    backdrop-filter:blur(8px);
+
+    z-index:99999;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:400px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    text-align:center;
+
+    animation:modalShow .3s ease;
+}
+
+@keyframes modalShow{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.login-icon{
+    width:70px;
+    height:70px;
+
+    border-radius:20px;
+
+    background:#e2fff4;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+    margin:0 auto 20px;
+}
+
+.login-box h2{
+    margin-bottom:10px;
+    color:#12372d;
+}
+
+.login-box p{
+    color:var(--gray);
+    margin-bottom:20px;
+}
+
+.login-box input,
+.admin-box input,
+.admin-box textarea{
+    width:100%;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:13px;
+
+    margin-bottom:15px;
+
+    outline:none;
+
+    font-size:15px;
+}
+
+.login-box input:focus,
+.admin-box input:focus,
+.admin-box textarea:focus{
+    border-color:var(--green);
+}
+
+.error{
+    color:#ef4444;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+
+/* =========================
+   ADMIN PANEL
+========================= */
+
+.admin-box{
+    width:100%;
+    max-width:800px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    animation:modalShow .3s ease;
+}
+
+.admin-box h2{
+    color:var(--green);
+    margin-bottom:25px;
+}
+
+.admin-section{
+    padding:20px 0;
+
+    border-bottom:1px solid #eee;
+}
+
+.admin-section h3{
+    margin-bottom:15px;
+}
+
+.product-editor{
+    border:1px solid #ddd;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    margin-bottom:15px;
+}
+
+.admin-actions{
+    display:flex;
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.save-btn{
+    background:var(--green);
+    color:white;
+
+    padding:13px 25px;
+
+    border-radius:10px;
+}
+
+.close-btn{
+    background:#eee;
+
+    padding:13px 25px;
+
+    border-radius:10px;
+}
+
+.delete-btn{
+    background:#ef4444;
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+}
+
+.add-btn{
+    background:#12372d;
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark{
+    background:#071a15;
+    color:white;
+}
+
+body.dark header,
+body.dark .product,
+body.dark .feature,
+body.dark .contact-card,
+body.dark .about-card,
+body.dark .search-box,
+body.dark .login-box,
+body.dark .admin-box{
+    background:#102720;
+    color:white;
+}
+
+body.dark .section-title,
+body.dark .hero h1,
+body.dark .product-info h3,
+body.dark .feature h3,
+body.dark .contact-card h3{
+    color:white;
+}
+
+body.dark .hero{
+    background:
+    radial-gradient(circle at 80% 30%,#0d4536 0%,transparent 35%),
+    #071a15;
+}
+
+body.dark .about{
+    background:#09231c;
+}
+
+body.dark nav a{
+    color:#d8eee7;
+}
+
+body.dark .hero p,
+body.dark .section-subtitle,
+body.dark .product-info p,
+body.dark .feature p,
+body.dark .contact-card p{
+    color:#a7c1b9;
+}
+
+body.dark .product-image{
+    background:#0b3328;
+}
+
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+.top-btn{
+    position:fixed;
+
+    bottom:25px;
+    left:25px;
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    background:var(--green);
+    color:white;
+
+    font-size:20px;
+
+    display:none;
+
+    z-index:4000;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column;
+
+        text-align:center;
+
+        padding-top:140px;
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        width:100%;
+        margin-top:50px;
+    }
+
+    .medical-card{
+        width:280px;
+        height:280px;
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .about-container{
+        flex-direction:column;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-head{
+        flex-direction:column;
+        align-items:stretch;
+        gap:20px;
+    }
+
+    .search-box{
+        width:100%;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .section-title{
+        font-size:30px;
+    }
+
+    header{
+        padding:15px 5%;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- LOADER -->
+
+<div class="loader">
+    <div class="loader-circle"></div>
+</div>
+
+
+<!-- FLOATING SHAPES -->
+
+<div class="shape shape1"></div>
+<div class="shape shape2"></div>
+<div class="shape shape3"></div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ✚
+        </div>
+
+        <span id="siteName">
+            صيدلية سناء محمد
+        </span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#home">الرئيسية</a>
+
+        <a href="#products">المنتجات</a>
+
+        <a href="#about">عن الصيدلية</a>
+
+        <a href="#contact">تواصل معنا</a>
+
+    </nav>
+
+
+    <div class="header-icons">
+
+        <button
+            class="icon-btn"
+            onclick="toggleDark()">
+            🌙
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="openLogin()">
+            🔐
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="showCart()">
+
+            🛒
+
+            <span
+                class="cart-count"
+                id="cartCount">
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            💚 صحتك أولويتنا
+        </span>
+
+        <h1 id="heroTitle">
+            صيدلية <span>سناء محمد</span>
+        </h1>
+
+        <p id="heroText">
+            نهتم بصحتك ونوفر لك منتجات صحية
+            وعناية شخصية وخدمات صيدلية بجودة عالية.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#products"
+               class="primary-btn">
+                اكتشف المنتجات
+            </a>
+
+            <a href="#contact"
+               class="secondary-btn">
+                تواصل معنا
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="medical-card">
+
+            <div class="big-cross"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🚚
+        </div>
+
+        <div>
+            <h3>خدمة مميزة</h3>
+            <p>نهتم براحة العملاء</p>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            💊
+        </div>
+
+        <div>
+            <h3>منتجات متنوعة</h3>
+            <p>اختيارات متعددة</p>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🛡️
+        </div>
+
+        <div>
+            <h3>جودة عالية</h3>
+            <p>نهتم بالجودة</p>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            ❤️
+        </div>
+
+        <div>
+            <h3>نهتم بك</h3>
+            <p>صحتك تهمنا</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section
+    class="products-section"
+    id="products">
+
+    <div class="section-head">
+
+        <div>
+
+            <h2 class="section-title">
+                منتجات <span>الصيدلية</span>
+            </h2>
+
+            <p class="section-subtitle">
+                اكتشف بعض المنتجات المتوفرة لدينا
+            </p>
+
+        </div>
+
+
+        <div class="search-box">
+
+            🔎
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ابحث عن منتج..."
+                oninput="searchProducts()">
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="products"
+        id="productsContainer">
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section
+    class="about"
+    id="about">
+
+    <div class="about-container">
+
+        <div class="about-text">
+
+            <h2 class="section-title">
+                عن <span>صيدلية سناء محمد</span>
+            </h2>
+
+            <p id="aboutText">
+                صيدلية سناء محمد تهتم بتوفير المنتجات
+                الصحية والعناية الشخصية والمستلزمات الطبية،
+                مع الحرص على تقديم خدمة مميزة للعملاء.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <div class="about-card-icon">
+                💚
+            </div>
+
+            <h2>
+                صحتك تهمنا
+            </h2>
+
+            <p>
+                هدفنا تقديم تجربة سهلة ومريحة لكل عميل.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section
+    class="contact"
+    id="contact">
+
+    <h2 class="section-title"
+        style="text-align:center;margin-bottom:40px">
+
+        تواصل <span>معنا</span>
+
+    </h2>
+
+
+    <div class="contact-grid">
+
+        <div class="contact-card">
+
+            <div class="icon">
+                📍
+            </div>
+
+            <h3>
+                العنوان
+            </h3>
+
+            <p id="address">
+                اكتب عنوان الصيدلية هنا
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="icon">
+                📞
+            </div>
+
+            <h3>
+                الهاتف
+            </h3>
+
+            <p id="phone">
+                01000000000
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="icon">
+                ✉️
+            </div>
+
+            <h3>
+                البريد الإلكتروني
+            </h3>
+
+            <p id="email">
+                pharmacy@example.com
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>
+        💊 صيدلية سناء محمد
+    </h2>
+
+    <p>
+        © 2026 جميع الحقوق محفوظة
+    </p>
+
+</footer>
+
+
+<!-- BACK TOP -->
+
+<button
+    class="top-btn"
+    id="topBtn"
+    onclick="window.scrollTo(0,0)">
+
+    ↑
+
+</button>
+
+
+<!-- LOGIN MODAL -->
+
+<div
+    class="modal"
+    id="loginModal">
+
+    <div class="login-box">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+        <h2>
+            لوحة الإدارة
+        </h2>
+
+        <p>
+            أدخل كلمة المرور للدخول
+        </p>
+
+        <div
+            class="error"
+            id="loginError">
+        </div>
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="كلمة المرور">
+
+        <button
+            class="primary-btn"
+            style="width:100%"
+            onclick="login()">
+
+            تسجيل الدخول
+
+        </button>
+
+        <br><br>
+
+        <button
+            class="secondary-btn"
+            style="width:100%"
+            onclick="closeLogin()">
+
+            إلغاء
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div
+    class="modal"
+    id="adminModal">
+
+    <div class="admin-box">
+
+        <h2>
+            ⚙️ لوحة تحكم صيدلية سناء محمد
+        </h2>
+
+
+        <div class="admin-section">
+
+            <h3>
+                بيانات الصيدلية
+            </h3>
+
+            <input
+                id="editSiteName"
+                placeholder="اسم الصيدلية">
+
+            <input
+                id="editHeroTitle"
+                placeholder="العنوان الرئيسي">
+
+            <textarea
+                id="editHeroText"
+                placeholder="الوصف الرئيسي">
+            </textarea>
+
+            <textarea
+                id="editAbout"
+                placeholder="عن الصيدلية">
+            </textarea>
+
+            <input
+                id="editAddress"
+                placeholder="العنوان">
+
+            <input
+                id="editPhone"
+                placeholder="رقم الهاتف">
+
+            <input
+                id="editEmail"
+                placeholder="البريد الإلكتروني">
+
+        </div>
+
+
+        <div class="admin-section">
+
+            <h3>
+                💊 المنتجات
+            </h3>
+
+            <div id="editProducts"></div>
+
+            <button
+                class="add-btn"
+                onclick="addProduct()">
+
+                + إضافة منتج
+
+            </button>
+
+        </div>
+
+
+        <div class="admin-actions">
+
+            <button
+                class="save-btn"
+                onclick="saveChanges()">
+
+                💾 حفظ التعديلات
+
+            </button>
+
+            <button
+                class="close-btn"
+                onclick="closeAdmin()">
+
+                إغلاق
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+const ADMIN_PASSWORD = "Sanaa@2026";
+
+
+/* =========================
+   DATA
+========================= */
+
+let data =
+JSON.parse(localStorage.getItem("sanaaPharmacy"))
+|| {
+
+    siteName:
+    "صيدلية سناء محمد",
+
+    heroTitle:
+    "صيدلية سناء محمد",
+
+    heroText:
+    "نهتم بصحتك ونوفر لك منتجات صحية وعناية شخصية وخدمات صيدلية بجودة عالية.",
+
+    about:
+    "صيدلية سناء محمد تهتم بتوفير المنتجات الصحية والعناية الشخصية والمستلزمات الطبية، مع الحرص على تقديم خدمة مميزة للعملاء.",
+
+    address:
+    "اكتب عنوان الصيدلية هنا",
+
+    phone:
+    "01000000000",
+
+    email:
+    "pharmacy@example.com",
+
+    products:[
+
+        {
+            name:"فيتامينات",
+            price:"150 جنيه",
+            image:"https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80"
+        },
+
+        {
+            name:"منتجات العناية بالبشرة",
+            price:"250 جنيه",
+            image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
+        },
+
+        {
+            name:"العناية بالشعر",
+            price:"180 جنيه",
+            image:"https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80"
+        },
+
+        {
+            name:"منتجات الأطفال",
+            price:"120 جنيه",
+            image:"https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=600&q=80"
+        }
+
+    ]
+
+};
+
+
+let cart = 0;
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderWebsite(){
+
+    document.getElementById("siteName").innerText =
+        data.siteName;
+
+    document.getElementById("heroTitle").innerHTML =
+        data.heroTitle.replace(
+            "سناء محمد",
+            "<span>سناء محمد</span>"
+        );
+
+    document.getElementById("heroText").innerText =
+        data.heroText;
+
+    document.getElementById("aboutText").innerText =
+        data.about;
+
+    document.getElementById("address").innerText =
+        data.address;
+
+    document.getElementById("phone").innerText =
+        data.phone;
+
+    document.getElementById("email").innerText =
+        data.email;
+
+
+    renderProducts(data.products);
+
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+function renderProducts(products){
+
+    const container =
+        document.getElementById(
+            "productsContainer"
+        );
+
+    container.innerHTML = "";
+
+
+    products.forEach(
+        (product,index)=>{
+
+            container.innerHTML += `
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                    <p>
+                        منتج متوفر في الصيدلية
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <span class="price">
+                            ${product.price}
+                        </span>
+
+                        <button
+                            class="add-cart"
+                            onclick="addToCart()">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
+
+    const filtered =
+        data.products.filter(
+            product =>
+            product.name
+            .toLowerCase()
+            .includes(search)
+        );
+
+    renderProducts(filtered);
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(){
+
+    cart++;
+
+    document.getElementById(
+        "cartCount"
+    ).innerText = cart;
+
+}
+
+
+function showCart(){
+
+    alert(
+        cart === 0
+        ? "🛒 السلة فارغة"
+        : "🛒 عدد المنتجات في السلة: " + cart
+    );
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "darkMode",
+        document.body.classList.contains("dark")
+    );
+
+}
+
+if(
+    localStorage.getItem("darkMode")
+    === "true"
+){
+
+    document.body.classList.add("dark");
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function openLogin(){
+
+    document.getElementById(
+        "loginModal"
+    ).style.display="flex";
+
+}
+
+
+function closeLogin(){
+
+    document.getElementById(
+        "loginModal"
+    ).style.display="none";
+
+    document.getElementById(
+        "passwordInput"
+    ).value="";
+
+    document.getElementById(
+        "loginError"
+    ).innerText="";
+
+}
+
+
+function login(){
+
+    const password =
+        document.getElementById(
+            "passwordInput"
+        ).value;
+
+
+    if(password === ADMIN_PASSWORD){
+
+        closeLogin();
+
+        openAdmin();
+
+    }else{
+
+        document.getElementById(
+            "loginError"
+        ).innerText =
+        "❌ كلمة المرور غير صحيحة";
+
+    }
+
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function openAdmin(){
+
+    document.getElementById(
+        "adminModal"
+    ).style.display="flex";
+
+
+    document.getElementById(
+        "editSiteName"
+    ).value=data.siteName;
+
+
+    document.getElementById(
+        "editHeroTitle"
+    ).value=data.heroTitle;
+
+
+    document.getElementById(
+        "editHeroText"
+    ).value=data.heroText;
+
+
+    document.getElementById(
+        "editAbout"
+    ).value=data.about;
+
+
+    document.getElementById(
+        "editAddress"
+    ).value=data.address;
+
+
+    document.getElementById(
+        "editPhone"
+    ).value=data.phone;
+
+
+    document.getElementById(
+        "editEmail"
+    ).value=data.email;
+
+
+    renderProductEditors();
+
+}
+
+
+function closeAdmin(){
+
+    document.getElementById(
+        "adminModal"
+    ).style.display="none";
+
+}
+
+
+/* =========================
+   PRODUCT EDITORS
+========================= */
+
+function renderProductEditors(){
+
+    const container =
+        document.getElementById(
+            "editProducts"
+        );
+
+    container.innerHTML="";
+
+
+    data.products.forEach(
+        (product,index)=>{
+
+            container.innerHTML += `
+
+            <div class="product-editor">
+
+                <input
+                    id="pname${index}"
+                    value="${product.name}"
+                    placeholder="اسم المنتج">
+
+                <input
+                    id="pprice${index}"
+                    value="${product.price}"
+                    placeholder="السعر">
+
+                <input
+                    id="pimage${index}"
+                    value="${product.image}"
+                    placeholder="رابط الصورة">
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteProduct(${index})">
+
+                    🗑 حذف المنتج
+
+                </button>
+
+            </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ADD PRODUCT
+========================= */
+
+function addProduct(){
+
+    data.products.push({
+
+        name:"منتج جديد",
+
+        price:"100 جنيه",
+
+        image:
+        "https://via.placeholder.com/600x400?text=Product"
+
+    });
+
+    renderProductEditors();
+
+}
+
+
+/* =========================
+   DELETE PRODUCT
+========================= */
+
+function deleteProduct(index){
+
+    data.products.splice(index,1);
+
+    renderProductEditors();
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveChanges(){
+
+    data.siteName =
+        document.getElementById(
+            "editSiteName"
+        ).value;
+
+    data.heroTitle =
+        document.getElementById(
+            "editHeroTitle"
+        ).value;
+
+    data.heroText =
+        document.getElementById(
+            "editHeroText"
+        ).value;
+
+    data.about =
+        document.getElementById(
+            "editAbout"
+        ).value;
+
+    data.address =
+        document.getElementById(
+            "editAddress"
+        ).value;
+
+    data.phone =
+        document.getElementById(
+            "editPhone"
+        ).value;
+
+    data.email =
+        document.getElementById(
+            "editEmail"
+        ).value;
+
+
+    data.products.forEach(
+        (product,index)=>{
+
+            product.name =
+                document.getElementById(
+                    "pname"+index
+                ).value;
+
+            product.price =
+                document.getElementById(
+                    "pprice"+index
+                ).value;
+
+            product.image =
+                document.getElementById(
+                    "pimage"+index
+                ).value;
+
+        }
+    );
+
+
+    localStorage.setItem(
+        "sanaaPharmacy",
+        JSON.stringify(data)
+    );
+
+
+    renderWebsite();
+
+    closeAdmin();
+
+    alert(
+        "✅ تم حفظ التعديلات بنجاح"
+    );
+
+}
+
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+window.addEventListener(
+    "scroll",
+    ()=>{
+
+        const btn =
+            document.getElementById(
+                "topBtn"
+            );
+
+        if(window.scrollY > 500){
+
+            btn.style.display="block";
+
+        }else{
+
+            btn.style.display="none";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ENTER PASSWORD
+========================= */
+
+document.getElementById(
+    "passwordInput"
+).addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            login();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+renderWebsite();
+
+</script>
+
+</body>
+</html>
